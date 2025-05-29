@@ -1,0 +1,6 @@
+# Redirection HTTP vers HTTPS
+http://pixelearth.netlify.app/* https://www.pixelearth.netlify.app/:splat 301
+http://www.pixelearth.netlify.app/* https://www.pixelearth.netlify.app/:splat 301
+
+# Redirection HTTPS sans www vers HTTPS avec www
+https://pixelearth.netlify.app/* https://www.pixelearth.netlify.app/:splat 301
