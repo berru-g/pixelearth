@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!--test à la con n°42 795 439 184-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Map - 1€ le pixel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Pixel Map – 1€ par pixel</h1>
+    <div id="auth">
+        <input type="email" id="email" placeholder="Ton email">
+        <button onclick="login()">Connexion</button>
+    </div>
+    <div id="grid"></div>
+
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+
+        const supabaseUrl = 'https://szqwzslmaglrignthtfj.supabase.co'
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6cXd6c2xtYWdscmlnbnRodGZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MzgxMjEsImV4cCI6MjA2NDExNDEyMX0.gHTwZFfI_vXzA0i6Di1btqV_ojOv8vcMJTzAuW_A6pI'
+        const supabase = createClient(supabaseUrl, supabaseKey)
+
+        let user = null
+
+        window.login = async () => {
+            const email = document.getElementById('email').value
+            const { error } = await supabase.auth.signInWithOtp({ email })
+            if (error) return alert('Erreur: ' + error.message)
+            alert('Check ton email pour te connecter.')
+        }
+
+        const session = await supabase.auth.getSession()
+        user = session?.data?.session?.user || null
+        if (user) document.getElementById('auth').style.display = 'none'
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            user = session?.user
+            if (user) document.getElementById('auth').style.display = 'none'
+        })
+
+        // Charger les pixels
+        const grid = document.getElementById('grid')
+        const pixels = new Array(1600).fill().map((_, i) => i)
+
+        const { data, error } = await supabase.from('pixels').select('*')
+        const soldMap = new Set(data?.filter(p => p.is_sold).map(p => p.id))
+
+        pixels.forEach((id) => {
+            const div = document.createElement('div')
+            div.className = 'pixel'
+            if (soldMap.has(id)) div.classList.add('sold')
+            div.addEventListener('click', async () => {
+                if (!user) return alert('Connecte-toi pour acheter.')
+                if (div.classList.contains('sold')) return alert('Déjà vendu.')
+
+                // Simulation de paiement ici
+                const confirmed = confirm(`Acheter le pixel ${id} pour 1€ ?`)
+                if (!confirmed) return
+
+                const { error } = await supabase.from('pixels').insert({
+                    id,
+                    is_sold: true,
+                    user_email: user.email
+                })
+
+                if (error) return alert('Erreur: ' + error.message)
+                div.classList.add('sold')
+            })
+            grid.appendChild(div)
+        })
+    </script>
+    <script src="script.js"></script>
+    <script src="supabase.js"></script>
+</body>
+
+</html>
