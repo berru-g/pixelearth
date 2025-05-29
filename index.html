@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <!--test à la con n°42 795 439 184-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Map - 1€ le pixel</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -15,6 +18,16 @@
         <button onclick="login()">Connexion</button>
     </div>
     <div id="grid"></div>
+    <div id="pixel-form" style="display:none; margin-top:20px;">
+        <h2>Personnalise ton pixel</h2>
+        <form id="customForm">
+            <label>Lien : <input type="text" id="linkUrl" /></label><br />
+            <label>Image URL : <input type="text" id="imageUrl" /></label><br />
+            <label>Couleur : <input type="color" id="color" value="#ff0000" /></label><br /><br />
+            <button type="submit">Acheter ce pixel pour 1€</button>
+        </form>
+    </div>
+
 
     <script type="module">
         import { createClient } from 'https://esm.sh/@supabase/supabase-js'
@@ -53,24 +66,14 @@
             div.className = 'pixel'
             if (soldMap.has(id)) div.classList.add('sold')
             div.addEventListener('click', async () => {
-                if (!user) return alert('Connecte-toi pour acheter.')
-                if (div.classList.contains('sold')) return alert('Déjà vendu.')
+                if (!user) return alert('Connecte-toi pour acheter.');
+                if (div.classList.contains('sold')) return alert('Déjà vendu.');
 
-                // Simulation de paiement ici
-                const confirmed = confirm(`Acheter le pixel ${id} pour 1€ ?`)
-                if (!confirmed) return
+                selectedPixelId = id;
+                formContainer.style.display = 'block';
+                window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' });
+            });
 
-                const { error } = await supabase.from('pixels').insert({
-                    id,
-                    is_sold: true,
-                    user_email: user.email
-                })
-
-                if (error) return alert('Erreur: ' + error.message)
-                div.classList.add('sold')
-            })
-            grid.appendChild(div)
-        })
     </script>
     <script src="script.js"></script>
     <script src="supabase.js"></script>
