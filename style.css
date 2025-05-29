@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif; /* Police moderne (à charger via Google Fonts) */
+  font-family: 'Inter', sans-serif; 
   background-color: var(--dark);
   color: var(--light);
   max-width: 800px;
@@ -23,6 +23,7 @@ h1 {
   margin-bottom: 30px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+
 @media (max-width: 600px) {
   #auth {
     flex-direction: column;

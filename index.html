@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-<!-- 
-    ============================================
+<!-- ============================================
        Developed by : https://github.com/berru-g/
        Date : 20/01/2025
        Copyright (c) 2025 Berru
-    ============================================
--->
+    ==========================================-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +18,6 @@
         content="acheter pixel, carte monde pixel, pixel à 1€, terre numérique, publicité pixel, acheter espace digital, pixel personnalisable, investissement pixel, carte interactive, pixel art monde, lien pixel, image pixel, propriétaire pixel, projet viral, cryptoterre, NFT pixel, géolocalisation pixel" />
     <meta name="author" content="Gael Berru.">
     <meta name="robots" content="noai">
-    <!-- Open Graph / Facebook (pour les partages sociaux) -->
     <meta property="og:title" content="Pixel Map – 1€ par pixel | Possédez un bout du monde numérique" />
     <meta property="og:description"
         content="Achetez et personnalisez votre pixel sur notre carte interactive. 100 000 pixels disponibles !" />
@@ -27,18 +25,15 @@
     <meta property="og:url" content="https://pixelearth.netlify.app" />
     <meta property="og:image" content="https://pixelearth.netlify.app/preview.jpg" /> <!-- Image 1200x630px -->
     <meta property="og:site_name" content="Pixel Map" />
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Pixel Map – 1€ par pixel" />
     <meta name="twitter:description"
         content="Possédez et personnalisez un pixel unique sur notre carte du monde digitale !" />
     <meta name="twitter:image" content="https://pixelearth.netlify.app/preview.jpg" />
-
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,26 +73,26 @@
     <!-- Google tag (gtag.js) -->
 </head>
 <script>
-        // Popup déclenchée au chargement de la page
-        document.addEventListener('DOMContentLoaded', () => {
-            Swal.fire({
-                title: '🌍 Pixel Map - Votre espace dans le monde numérique',
-                html: `<p>Pixel Map est une carte numérique où vous pouvez <strong>acheter un pixel pour 1€</strong>, le personnaliser avec une <strong>couleur, une image et un lien</strong>, et devenir <strong>propriétaire d'un espace unique</strong> dans ce monde virtuel collaboratif.</p>`,
-                icon: 'info',
-                background: '#1a1a2e',  
-                color: '#f4f4f4',        
-                confirmButtonText: 'Explorer la carte',
-                confirmButtonColor: '#ff6b6b',  
-                showCloseButton: true,
-                imageUrl: 'https://i.imgur.com/XYGJzJl.png',  
-                imageAlt: 'Carte Pixel Map',
-                footer: '<a href="/faq">Comment ça marche ?</a>'
-            });
+    // Popup déclenchée au chargement de la page
+    document.addEventListener('DOMContentLoaded', () => {
+        Swal.fire({
+            title: '🌍 Pixel Map - Un pixel à la fois, on change le monde numérique.',
+            html: `<p>Pixel Map est une carte numérique où vous pouvez <strong>acheter un pixel pour 1€</strong>, le personnaliser avec une <strong>couleur, une image et un lien</strong>, et devenir <strong>propriétaire d'un espace unique</strong> dans ce monde virtuel collaboratif.</p>`,
+            icon: 'info',
+            background: '#1a1a2e',
+            color: '#f4f4f4',
+            confirmButtonText: 'Explorer la carte',
+            confirmButtonColor: '#ff6b6b',
+            showCloseButton: true,
+            imageUrl: 'https://i.imgur.com/XYGJzJl.png',
+            imageAlt: 'Carte Pixel Map',
+            footer: '<a href="/faq">Comment ça marche ?</a>'
         });
-    </script>
+    });
+</script>
 
 <body>
-    <h1>Pixel Map 1$ = pixel</h1>
+    <h1>Pixel Map 1€ = pixel</h1>
     <div id="auth">
         <input type="email" id="email" placeholder="Sign up to buy a pixel">
         <button onclick="login()">Connexion</button>
@@ -113,53 +108,6 @@
         </form>
     </div>
 
-
-    <script type="module">
-        import { createClient } from 'https://esm.sh/@supabase/supabase-js'
-
-        const supabaseUrl = 'https://szqwzslmaglrignthtfj.supabase.co'
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6cXd6c2xtYWdscmlnbnRodGZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MzgxMjEsImV4cCI6MjA2NDExNDEyMX0.gHTwZFfI_vXzA0i6Di1btqV_ojOv8vcMJTzAuW_A6pI'
-        const supabase = createClient(supabaseUrl, supabaseKey)
-
-        let user = null
-
-        window.login = async () => {
-            const email = document.getElementById('email').value
-            const { error } = await supabase.auth.signInWithOtp({ email })
-            if (error) return alert('Erreur: ' + error.message)
-            alert('Check ton email pour te connecter.')
-        }
-
-        const session = await supabase.auth.getSession()
-        user = session?.data?.session?.user || null
-        if (user) document.getElementById('auth').style.display = 'none'
-
-        supabase.auth.onAuthStateChange((_event, session) => {
-            user = session?.user
-            if (user) document.getElementById('auth').style.display = 'none'
-        })
-
-        // Charger les pixels
-        const grid = document.getElementById('grid')
-        const pixels = new Array(1600).fill().map((_, i) => i)
-
-        const { data, error } = await supabase.from('pixels').select('*')
-        const soldMap = new Set(data?.filter(p => p.is_sold).map(p => p.id))
-
-        pixels.forEach((id) => {
-            const div = document.createElement('div')
-            div.className = 'pixel'
-            if (soldMap.has(id)) div.classList.add('sold')
-            div.addEventListener('click', async () => {
-                if (!user) return alert('Connecte-toi pour acheter.');
-                if (div.classList.contains('sold')) return alert('Déjà vendu.');
-
-                selectedPixelId = id;
-                formContainer.style.display = 'block';
-                window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' });
-            });
-
-    </script>
     <script src="script.js"></script>
     <script src="supabase.js"></script>
 </body>
