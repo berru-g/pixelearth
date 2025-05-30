@@ -1,4 +1,29 @@
-// Charger les pixels
+import { supabase } from './supabase.js'
+
+let user = null
+let selectedPixelId = null
+
+const formContainer = document.getElementById('pixel-form')
+const form = document.getElementById('customForm')
+
+// Authentification
+window.login = async () => {
+  const email = document.getElementById('email').value
+  const { error } = await supabase.auth.signInWithOtp({ email })
+  if (error) return alert('Erreur: ' + error.message)
+  alert('Check ton email pour te connecter.')
+}
+
+const session = await supabase.auth.getSession()
+user = session?.data?.session?.user || null
+if (user) document.getElementById('auth').style.display = 'none'
+
+supabase.auth.onAuthStateChange((_event, session) => {
+  user = session?.user
+  if (user) document.getElementById('auth').style.display = 'none'
+})
+
+// Charger les pixels depuis Supabase
 const grid = document.getElementById('grid')
 const pixels = new Array(1600).fill().map((_, i) => i)
 
@@ -9,84 +34,64 @@ pixels.forEach((id) => {
   const div = document.createElement('div')
   div.className = 'pixel'
   if (soldMap.has(id)) div.classList.add('sold')
-  div.addEventListener('click', async () => {
-    if (!user) return alert('Connecte-toi pour acheter.');
-    if (div.classList.contains('sold')) return alert('Déjà vendu.');
 
-    selectedPixelId = id;
-    formContainer.style.display = 'block';
-    window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' });
-  });
+  div.addEventListener('click', () => {
+    if (!user) return alert('Connecte-toi pour acheter.')
+    if (div.classList.contains('sold')) return alert('Déjà vendu.')
 
-  // check session
-  async function buyPixel(pixelId, color, imageUrl, linkUrl) {
-    const res = await fetch('/.netlify/functions/createCheckoutSession', {
-      method: 'POST',
-      body: JSON.stringify({ pixelId, color, imageUrl, linkUrl }),
-    });
+    selectedPixelId = id
+    formContainer.style.display = 'block'
+    window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' })
+  })
 
-    const data = await res.json();
-    if (data.id) {
-      window.location.href = `https://checkout.stripe.com/pay/${data.id}`;
-    }
+  grid.appendChild(div)
+})
+
+// Formulaire + envoi vers Stripe
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+
+  const color = document.getElementById('color').value
+  const imageUrl = document.getElementById('imageUrl').value
+  const linkUrl = document.getElementById('linkUrl').value
+
+  const res = await fetch('/.netlify/functions/createCheckoutSession', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ pixelId: selectedPixelId, color, imageUrl, linkUrl }),
+  })
+
+  const result = await res.json()
+  if (result.id) {
+    window.location.href = `https://checkout.stripe.com/pay/${result.id}`
+  } else {
+    alert('Erreur Stripe : ' + result.error)
   }
+})
 
-  //stripe
-  let selectedPixelId = null;
+// SweetAlert post-achat (si ?session_id dans l'URL)
+const urlParams = new URLSearchParams(window.location.search)
+const sessionId = urlParams.get('session_id')
 
-  const formContainer = document.getElementById('pixel-form');
-  const form = document.getElementById('customForm');
+if (sessionId) {
+  fetch('/.netlify/functions/getSessionData', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ session_id: sessionId })
+  })
+    .then(res => res.json())
+    .then(async (session) => {
+      const pixelId = session.metadata.pixelId
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+      const { data, error } = await supabase.from('pixels').select('*').eq('id', pixelId).single()
+      if (error) return
 
-    const color = document.getElementById('color').value;
-    const imageUrl = document.getElementById('imageUrl').value;
-    const linkUrl = document.getElementById('linkUrl').value;
+      Swal.fire({
+        icon: 'success',
+        title: 'Achat validé !',
+        html: `Pixel #${data.id} acheté.<br>Couleur : ${data.color}<br>Lien : ${data.link_url}`
+      })
 
-    const res = await fetch('/.netlify/functions/createCheckoutSession', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        pixelId: selectedPixelId,
-        color,
-        imageUrl,
-        linkUrl,
-      }),
-    });
-
-    const data = await res.json();
-    if (data.id) {
-      window.location.href = `https://checkout.stripe.com/pay/${data.id}`;
-    } else {
-      alert('Erreur Stripe : ' + data.error);
-    }
-  });
-  
-  //popup SweetAlert
-  const urlParams = new URLSearchParams(window.location.search);
-  const sessionId = urlParams.get('session_id');
-
-  if (sessionId) {
-    fetch(`https://api.stripe.com/v1/checkout/sessions/${sessionId}`, {
-      headers: {
-        Authorization: `Bearer ${'sk_test_...'}`
-      }
+      window.history.replaceState({}, document.title, "/")
     })
-      .then(res => res.json())
-      .then(async (session) => {
-        const pixelId = session.metadata.pixelId;
-
-        const { data, error } = await supabase.from('pixels').select('*').eq('id', pixelId).single();
-        if (error) return;
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Achat validé !',
-          html: `Pixel #${data.id} acheté.<br>Couleur : ${data.color}<br>Lien : ${data.link_url}`,
-        });
-
-        // Nettoyer l’URL
-        window.history.replaceState({}, document.title, "/");
-      });
-  }
+}
