@@ -126,6 +126,10 @@ button:hover {
     background: #f1acac;
     cursor: not-allowed;
 }
+.pixel.selected {
+  background: rgba(0, 255, 0, 0.5);
+}
+
 #pixel-form {
   background: rgba(30, 30, 60, 0.7);
   padding: 20px;
