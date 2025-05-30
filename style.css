@@ -109,7 +109,11 @@ button:hover {
   background: #ddd;
   transition: all 0.2s;
 }
-
+.pixel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .pixel:hover {
   transform: scale(1.1);
   z-index: 1;
