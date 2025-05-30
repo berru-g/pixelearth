@@ -60,6 +60,16 @@ form.addEventListener('submit', async (e) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ pixelId: selectedPixelId, color, imageUrl, linkUrl }),
   })
+  //retour 
+  const data = await res.json();
+
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    alert('Erreur Stripe : ' + data.error);
+  }
+  console.log('Réponse Stripe:', data)
+
 
   const result = await res.json()
   if (result.id) {
