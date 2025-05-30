@@ -106,7 +106,7 @@ button:hover {
 
 .pixel {
   aspect-ratio: 1;
-  background: #ddd;
+  background-color: transparent !important;
   transition: all 0.2s;
   background-size: cover;
   background-position: center;
@@ -119,7 +119,6 @@ button:hover {
 }
 
 .pixel.sold {
-  color:hsla(240, 87%, 51%, 0.271);
   cursor: not-allowed; 
 }
 

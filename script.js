@@ -25,7 +25,8 @@ supabase.auth.onAuthStateChange((_event, session) => {
 
 // Charger les pixels depuis Supabase
 const grid = document.getElementById('grid')
-const pixels = new Array(1600).fill().map((_, i) => i)
+//const pixels = new Array(1600).fill().map((_, i) => i)
+const pixels = data.map(p => p.id)
 
 const { data, error } = await supabase.from('pixels').select('*')
 const soldMap = new Set(data?.filter(p => p.is_sold).map(p => p.id))
