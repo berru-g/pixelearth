@@ -20,7 +20,7 @@ Chaque pixel acheté reste visible **à vie**, comme une empreinte numérique.
 
 ## 🛠️ Stack utilisée
 
-- **Frontend** : HTML, CSS, Vanilla JavaScript
+- **Frontend** : HTML, CSS, JavaScript
 - **Backend as a Service** : [Supabase](https://supabase.io/)
 - **Paiement** : [Stripe](https://stripe.com/)
 - **Déploiement** : [Netlify](https://www.netlify.com/)
