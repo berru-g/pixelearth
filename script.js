@@ -23,6 +23,7 @@ supabase.auth.onAuthStateChange((_event, session) => {
   if (user) document.getElementById('auth').style.display = 'none'
 })
 
+/*
 // Charger les pixels depuis Supabase
 const grid = document.getElementById('grid')
 const pixels = new Array(1600).fill().map((_, i) => i)
@@ -46,6 +47,49 @@ pixels.forEach((id) => {
 
   grid.appendChild(div)
 })
+*/
+// ==== MODIFICATIONS DÉBUT ==== //
+
+async function loadPixels() {
+  const { data, error } = await supabase
+    .from('pixels')
+    .select('id, is_sold, color, image_url, link_url')
+    .order('id');
+
+  if (error) {
+    console.error("Erreur Supabase:", {
+      message: error.message,
+      details: error.details,
+      code: error.code
+    });
+    return [];
+  }
+
+  console.log("Données brutes reçues:", data); // Debug crucial
+  return data || [];
+}
+
+// Utilisation (remplacer l'ancienne récupération) :
+const pixelsData = await loadPixels();
+const soldMap = new Set(pixelsData.filter(p => p.is_sold).map(p => p.id));
+pixels.forEach((id) => {
+  const div = document.createElement('div')
+  div.className = 'pixel'
+  if (soldMap.has(id)) div.classList.add('sold')
+
+  div.addEventListener('click', () => {
+    if (!user) return alert('Connecte-toi pour acheter.')
+    if (div.classList.contains('sold')) return alert('Déjà vendu.')
+
+    selectedPixelId = id
+    formContainer.style.display = 'block'
+    window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' })
+  })
+
+  grid.appendChild(div)
+})
+
+
 
 // Formulaire + envoi vers Stripe
 form.addEventListener('submit', async (e) => {
