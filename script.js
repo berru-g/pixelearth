@@ -84,19 +84,16 @@ pixels.forEach((id) => {
 })
   */
 pixels.forEach((id) => {
+  const pixelData = data.find(p => p.id === id)
   const div = document.createElement('div')
   div.className = 'pixel'
   div.dataset.pixelId = id
 
-  const pixelData = data.find(p => p.id === id)
-
-  // Pixel considéré comme "vendu" si is_sold ou image_url ou link_url renseigné
   const isOccupied = pixelData?.is_sold || pixelData?.link_url || pixelData?.image_url
 
   if (isOccupied) {
     div.classList.add('sold')
 
-    // ⚠️ Appliquer image OU couleur, pas les deux
     if (pixelData.image_url) {
       div.style.backgroundImage = `url('${pixelData.image_url}')`
       div.style.backgroundSize = 'cover'
@@ -104,32 +101,31 @@ pixels.forEach((id) => {
     } else if (pixelData.color) {
       div.style.backgroundColor = pixelData.color
     }
-
-    // Ajouter lien si présent
-    if (pixelData.link_url) {
-      const a = document.createElement('a')
-      a.href = pixelData.link_url
-      a.target = '_blank'
-      a.style.display = 'block'
-      a.style.width = '100%'
-      a.style.height = '100%'
-      a.appendChild(div)
-      grid.appendChild(a)
-      return // ← NE PAS ajouter à nouveau
-    }
   }
 
-  // Gestion des pixels libres (interactifs)
-  div.addEventListener('click', () => {
-    if (!user) return alert('Connecte-toi pour acheter.')
-    if (div.classList.contains('sold')) return alert('Déjà vendu.')
+  // Comportement sur clic : seulement si pas occupé
+  if (!isOccupied) {
+    div.addEventListener('click', () => {
+      if (!user) return alert('Connecte-toi pour acheter.')
+      if (div.classList.contains('sold')) return alert('Déjà vendu.')
 
-    selectedPixelId = id
-    formContainer.style.display = 'block'
-    window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' })
-  })
+      selectedPixelId = id
+      formContainer.style.display = 'block'
+      window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' })
+    })
+  }
 
-  grid.appendChild(div)
+  // Si lien présent → envelopper dans <a>
+  if (pixelData?.link_url) {
+    const a = document.createElement('a')
+    a.href = pixelData.link_url
+    a.target = '_blank'
+    a.classList.add('pixel-wrapper') // style à ajouter
+    a.appendChild(div)
+    grid.appendChild(a)
+  } else {
+    grid.appendChild(div)
+  }
 })
 
 

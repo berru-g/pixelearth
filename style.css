@@ -137,6 +137,11 @@ button:hover {
     cursor: not-allowed;
 }
 
+.pixel-wrapper {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
 
 #pixel-form {
   background: rgba(30, 30, 60, 0.7);
