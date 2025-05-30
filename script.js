@@ -1,8 +1,3 @@
-console.log('GRID →', grid)
-console.log('DATA →', data)
-console.log(`Pixel #${id} :`, pixelData)
-
-
 import { supabase } from './supabase.js'
 
 let user = null
