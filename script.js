@@ -52,6 +52,31 @@ pixels.forEach((id) => {
 
   grid.appendChild(div)
 })
+//patch
+data.forEach(pixel => {
+  const div = document.querySelector(`.pixel[data-pixel-id="${pixel.id}"]`)
+  if (!div) return
+
+  if (pixel.is_sold || pixel.image_url || pixel.color || pixel.link_url) {
+    div.classList.add('sold')
+
+    if (pixel.image_url) {
+      div.style.backgroundImage = `url('${pixel.image_url}')`
+      div.style.backgroundSize = 'cover'
+      div.style.backgroundPosition = 'center'
+    } else if (pixel.color) {
+      div.style.backgroundColor = pixel.color
+    }
+
+    if (pixel.link_url) {
+      div.addEventListener('click', (e) => {
+        e.stopPropagation()
+        window.open(pixel.link_url, '_blank')
+      })
+    }
+  }
+})
+
 
 // Formulaire + envoi vers Stripe
 form.addEventListener('submit', async (e) => {
