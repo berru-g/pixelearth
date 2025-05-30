@@ -60,7 +60,7 @@ form.addEventListener('submit', async (e) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ pixelId: selectedPixelId, color, imageUrl, linkUrl }),
   })
-  //retour 
+  /*retour 
   const data = await res.json();
 
   if (data.url) {
@@ -68,7 +68,7 @@ form.addEventListener('submit', async (e) => {
   } else {
     alert('Erreur Stripe : ' + data.error);
   }
-  
+  */
 
   const result = await res.json()
   if (result.id) {
@@ -95,7 +95,11 @@ if (sessionId) {
       const pixelId = session.metadata.pixelId
 
       const { data, error } = await supabase.from('pixels').select('*').eq('id', pixelId).single()
-      if (error) return
+      if (error) {
+        console.error("Erreur Supabase:", error);
+        alert("Erreur Supabase:", error);
+        return;
+      }
 
       Swal.fire({
         icon: 'success',
