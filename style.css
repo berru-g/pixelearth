@@ -106,7 +106,7 @@ button:hover {
 
 .pixel {
   aspect-ratio: 1;
-  background-color: transparent !important;
+  background-color: whitesmoke;
   transition: all 0.2s;
   background-size: cover;
   background-position: center;
