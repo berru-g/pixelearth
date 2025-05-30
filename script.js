@@ -30,6 +30,14 @@ const pixels = new Array(1600).fill().map((_, i) => i)
 const { data, error } = await supabase.from('pixels').select('*')
 const soldMap = new Set(data?.filter(p => p.is_sold).map(p => p.id))
 
+// compteur ratio vendu/restant
+const pixelCounter = document.getElementById('pixel-counter')
+const totalPixels = pixels.length
+const soldPixels = soldMap.size
+
+pixelCounter.textContent = `🚀 Pixels vendus : ${soldPixels} / ${totalPixels}`
+
+
 // chargement des pixel sold et affichage des link & img
 pixels.forEach((id) => {
   const div = document.createElement('div')

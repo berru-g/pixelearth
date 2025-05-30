@@ -10,10 +10,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Earth</title>
-    <link rel="shortcut icon" href="./img/logo.png" />
-    <link rel="apple-touch-icon" href="./img/logo.png" />
+    <link rel="shortcut icon" href="logo.png" />
+    <link rel="apple-touch-icon" href="logo.png" />
     <meta name="description"
-        content="Achetez un pixel sur notre carte du monde numérique pour 1€ seulement ! Personnalisez-le avec une couleur, une image et un lien vers votre site. Devenez propriétaire d'un bout de terre digitale unique." />
+        content="Achetez un pixel sur notre carte du monde numérique pour 1€ seulement ! Personnalisez-le avec votre logo et un lien vers votre site. Devenez propriétaire d'un bout de terre digitale unique." />
     <meta name="keywords"
         content="acheter pixel, carte monde pixel, pixel à 1€, terre numérique, publicité pixel, acheter espace digital, pixel personnalisable, investissement pixel, carte interactive, pixel art monde, lien pixel, image pixel, propriétaire pixel, projet viral, cryptoterre, NFT pixel, géolocalisation pixel" />
     <meta name="author" content="Gael Berru.">
@@ -21,15 +21,15 @@
     <meta name="solana-wallet" content="none">
     <meta property="og:title" content="Pixel Map – 1€ par pixel | Possédez un bout du monde numérique" />
     <meta property="og:description"
-        content="Achetez et personnalisez votre pixel sur notre carte interactive. 100 000 pixels disponibles !" />
+        content="Achetez et personnalisez votre pixel sur notre carte interactive. 1600 pixels disponibles !" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pixelearth.netlify.app" />
-    <meta property="og:image" content="https://pixelearth.netlify.app/preview.jpg" /> <!-- Image 1200x630px -->
+    <meta property="og:image" content="https://pixelearth.netlify.app/pixelearth.png" /> <!-- Image 1200x630px -->
     <meta property="og:site_name" content="Pixel Map" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Pixel Map – 1€ par pixel" />
     <meta name="twitter:description"
-        content="Possédez et personnalisez un pixel unique sur notre carte du monde digitale !" />
+        content="Possédez et personnalisez un pixel unique sur notre carte digitale. Ajouter votre logo et le lien de votre entreprise !" />
     <meta name="twitter:image" content="https://pixelearth.netlify.app/preview.jpg" />
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -68,17 +68,27 @@
   "url": "https://pixelearth.netlify.app",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web Browser",
-  "screenshot": "https://pixelearth.netlify.app/screenshot.jpg"
+  "screenshot": "https://pixelearth.netlify.app/pixelearth.png"
 }
 </script>
+
     <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7YQRY4S68X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7YQRY4S68X');
+    </script>
+
 </head>
 <script>
     // Popup déclenchée au chargement de la page
     document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
             title: '🌍 Pixel Map - Un pixel à la fois, on change le monde numérique.',
-            html: `<p>Pixel Map est une carte numérique où vous pouvez <strong>acheter un pixel pour 1€</strong>, le personnaliser avec une <strong>couleur ou une image et un lien</strong>, et devenir <strong>propriétaire d'un espace unique</strong> dans ce monde virtuel collaboratif.</p>`,
+            html: `<p>Pixel Map est une carte numérique où vous pouvez <strong>acheter un pixel pour 1€</strong>, le personnaliser avec le <strong>logo et le lien de votre site</strong>. Devenez <strong>propriétaire d'un espace unique</strong> dans ce monde virtuel collaboratif.</p>`,
             icon: 'info',
             background: '#1a1a2e',
             color: '#f4f4f4',
@@ -93,6 +103,10 @@
 
 <body>
     <h1>Pixel Map 1€ = 1 pixel</h1>
+    <div id="pixel-counter" style="margin: 10px; font-weight: bold; color: white;">
+        Chargement...
+    </div>
+
     <div id="auth">
         <input type="email" id="email" placeholder="Sign up to buy a pixel">
         <button onclick="login()">Connexion</button>
