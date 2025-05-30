@@ -105,13 +105,25 @@ button:hover {
 }
 
 .pixel {
-  aspect-ratio: 1;
-  background: #ddd;
-  transition: all 0.2s;
+  width: 10px;
+  height: 10px;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.1s ease;
 }
+
+.pixel:hover {
+  transform: scale(1.1);
+}
+
+.pixel.sold {
+  cursor: not-allowed;
+}
+
+
 .pixel img {
   width: 100%;
   height: 100%;
@@ -123,19 +135,6 @@ button:hover {
   height: 10px;
 }
 
-.pixel:hover {
-  transform: scale(1.1);
-  z-index: 1;
-}
-/*
-.pixel.selected {
-  background: rgba(0, 255, 0, 0.5);
-}
-*/
-.pixel.sold {
-    background: #f1acac;
-    cursor: not-allowed;
-}
 
 .pixel-wrapper {
   display: inline-block;
