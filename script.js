@@ -134,7 +134,7 @@ if (sessionId) {
 
       Swal.fire({
         icon: 'success',
-        title: 'Achat validé !',
+        title: 'Achat validé merci !',
         html: `Pixel #${data.id} acheté.<br>Couleur : ${data.color}<br>Lien : ${data.link_url}`
       })
 

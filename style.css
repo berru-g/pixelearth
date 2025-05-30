@@ -105,13 +105,12 @@ button:hover {
 }
 
 .pixel {
-  width: 10px;
-  height: 10px;
-  background: var(--light);
-  border: 1px solid rgba(255,255,255,0.05);
+  aspect-ratio: 1;
+  background: #ddd;
+  transition: all 0.2s;
   background-size: cover;
   background-position: center;
-  cursor: pointer;
+  overflow: hidden;
 
 }
 
@@ -120,7 +119,7 @@ button:hover {
 }
 
 .pixel.sold {
-  color:hsla(240, 28%, 14%, 0.196);
+  color:hsla(240, 87%, 51%, 0.196);
   cursor: not-allowed; 
 }
 
