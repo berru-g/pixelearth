@@ -1,3 +1,8 @@
+console.log('GRID →', grid)
+console.log('DATA →', data)
+console.log(`Pixel #${id} :`, pixelData)
+
+
 import { supabase } from './supabase.js'
 
 let user = null
@@ -30,6 +35,7 @@ const pixels = new Array(1600).fill().map((_, i) => i)
 const { data, error } = await supabase.from('pixels').select('*')
 const soldMap = new Set(data?.filter(p => p.is_sold).map(p => p.id))
 
+/* chargement des pixel sold et affichage des link & img
 pixels.forEach((id) => {
   const div = document.createElement('div')
   div.className = 'pixel'
@@ -45,7 +51,51 @@ pixels.forEach((id) => {
   })
 
   grid.appendChild(div)
+})*/
+pixels.forEach((id) => {
+  const div = document.createElement('div')
+  div.className = 'pixel'
+  div.dataset.pixelId = id
+
+  const pixelData = data.find(p => p.id === id)
+
+  if (!pixelData) {
+    grid.appendChild(div)
+    return
+  }
+
+  const hasContent = pixelData.image_url || pixelData.color || pixelData.link_url
+  const isSold = pixelData.is_sold || hasContent
+
+  if (isSold) {
+    div.classList.add('sold')
+
+    if (pixelData.image_url) {
+      div.style.backgroundImage = `url('${pixelData.image_url}')`
+      div.style.backgroundSize = 'cover'
+      div.style.backgroundPosition = 'center'
+    } else if (pixelData.color) {
+      div.style.backgroundColor = pixelData.color
+    }
+
+    if (pixelData.link_url) {
+      div.addEventListener('click', (e) => {
+        e.stopPropagation()
+        window.open(pixelData.link_url, '_blank')
+      })
+    }
+  } else {
+    div.addEventListener('click', () => {
+      if (!user) return alert('Connecte-toi pour acheter.')
+      selectedPixelId = id
+      formContainer.style.display = 'block'
+      window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' })
+    })
+  }
+
+  grid.appendChild(div)
 })
+//test 287553783928
 
 // Formulaire + envoi vers Stripe
 form.addEventListener('submit', async (e) => {
