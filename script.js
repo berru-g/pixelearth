@@ -52,7 +52,7 @@ pixels.forEach((id) => {
 
   grid.appendChild(div)
 })
-//patch
+/*patch
 data.forEach(pixel => {
   const div = document.querySelector(`.pixel[data-pixel-id="${pixel.id}"]`)
   if (!div) return
@@ -76,7 +76,7 @@ data.forEach(pixel => {
     }
   }
 })
-
+*/
 
 // Formulaire + envoi vers Stripe
 form.addEventListener('submit', async (e) => {
