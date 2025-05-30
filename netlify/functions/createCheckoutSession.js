@@ -12,7 +12,7 @@ exports.handler = async (event) => {
           product_data: {
             name: `Pixel #${pixelId}`,
           },
-          unit_amount: 100, // 1€ en centimes
+          unit_amount: 100,
         },
         quantity: 1,
       }],
@@ -25,12 +25,13 @@ exports.handler = async (event) => {
         imageUrl,
         linkUrl
       }
-    });
+    })
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ id: session.id })
+      body: JSON.stringify({ url: session.url }) // ← Important !
     };
+
   } catch (error) {
     console.error('Stripe Error:', error);
     return {

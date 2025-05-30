@@ -63,7 +63,9 @@ form.addEventListener('submit', async (e) => {
 
   const result = await res.json()
   if (result.id) {
-    window.location.href = `https://checkout.stripe.com/pay/${result.id}`
+    /*window.location.href = `https://checkout.stripe.com/pay/${result.id}`*/
+    window.location.href = data.url
+
   } else {
     alert('Erreur Stripe : ' + result.error)
   }
