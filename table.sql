@@ -9,3 +9,4 @@ add column link_url text;
 
 alter table pixels
 add column stripe_session_id text;
+

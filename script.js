@@ -30,6 +30,7 @@ const pixels = new Array(1600).fill().map((_, i) => i)
 const { data, error } = await supabase.from('pixels').select('*')
 const soldMap = new Set(data?.filter(p => p.is_sold).map(p => p.id))
 
+// chargement des pixel sold et affichage des link & img
 pixels.forEach((id) => {
   const div = document.createElement('div')
   div.className = 'pixel'
@@ -46,6 +47,31 @@ pixels.forEach((id) => {
 
   grid.appendChild(div)
 })
+/*patch
+data.forEach(pixel => {
+  const div = document.querySelector(`.pixel[data-pixel-id="${pixel.id}"]`)
+  if (!div) return
+
+  if (pixel.is_sold || pixel.image_url || pixel.color || pixel.link_url) {
+    div.classList.add('sold')
+
+    if (pixel.image_url) {
+      div.style.backgroundImage = `url('${pixel.image_url}')`
+      div.style.backgroundSize = 'cover'
+      div.style.backgroundPosition = 'center'
+    } else if (pixel.color) {
+      div.style.backgroundColor = pixel.color
+    }
+
+    if (pixel.link_url) {
+      div.addEventListener('click', (e) => {
+        e.stopPropagation()
+        window.open(pixel.link_url, '_blank')
+      })
+    }
+  }
+})
+*/
 
 // Formulaire + envoi vers Stripe
 form.addEventListener('submit', async (e) => {
@@ -103,7 +129,7 @@ if (sessionId) {
 
       Swal.fire({
         icon: 'success',
-        title: 'Achat validé !',
+        title: 'Achat validé merci !',
         html: `Pixel #${data.id} acheté.<br>Couleur : ${data.color}<br>Lien : ${data.link_url}`
       })
 
