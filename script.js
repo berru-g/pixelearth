@@ -30,12 +30,14 @@ const pixels = new Array(1600).fill().map((_, i) => i)
 const { data, error } = await supabase.from('pixels').select('*')
 const soldMap = new Set(data?.filter(p => p.is_sold).map(p => p.id))
 
+// si pixel sold alors afficher le contenue
 pixels.forEach((id) => {
   const pixelData = data.find(p => p.id === id)
   const div = document.createElement('div')
   div.className = 'pixel'
   div.dataset.pixelId = id
 
+  // Si vendu : afficher image ou couleur
   if (pixelData?.is_sold) {
     div.classList.add('sold')
 
@@ -47,20 +49,16 @@ pixels.forEach((id) => {
       div.style.backgroundColor = pixelData.color
     }
 
+    // Si lien → clic redirige
     if (pixelData.link_url) {
-      const a = document.createElement('a')
-      a.href = pixelData.link_url
-      a.target = '_blank'
-      a.style.display = 'block'
-      a.style.width = '100%'
-      a.style.height = '100%'
-      a.appendChild(div)
-      grid.appendChild(a)
-      return
+      div.addEventListener('click', (e) => {
+        e.stopPropagation()
+        window.open(pixelData.link_url, '_blank')
+      })
     }
   }
 
-  // Si pixel n’est pas vendu → achat possible
+  // Si NON vendu → sélection possible
   if (!pixelData?.is_sold) {
     div.addEventListener('click', () => {
       if (!user) return alert('Connecte-toi pour acheter.')
@@ -73,7 +71,6 @@ pixels.forEach((id) => {
   grid.appendChild(div)
 })
 
-// si pixel sold alors afficher le contenue
 /*
 pixels.forEach((id) => {
   const div = document.createElement('div')
