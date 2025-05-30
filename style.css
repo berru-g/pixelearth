@@ -115,20 +115,15 @@ button:hover {
   z-index: 1;
 }
 /*
-.pixel {
-    width: 10px;
-    height: 10px;
-    background: #333;
-    cursor: pointer;
+.pixel.selected {
+  background: rgba(0, 255, 0, 0.5);
 }
 */
 .pixel.sold {
     background: #f1acac;
     cursor: not-allowed;
 }
-.pixel.selected {
-  background: rgba(0, 255, 0, 0.5);
-}
+
 
 #pixel-form {
   background: rgba(30, 30, 60, 0.7);
