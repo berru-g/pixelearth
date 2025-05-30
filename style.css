@@ -108,12 +108,21 @@ button:hover {
   aspect-ratio: 1;
   background: #ddd;
   transition: all 0.2s;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
 .pixel img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+.pixel-link {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+
 .pixel:hover {
   transform: scale(1.1);
   z-index: 1;

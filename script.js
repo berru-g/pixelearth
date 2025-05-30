@@ -30,6 +30,7 @@ const pixels = new Array(1600).fill().map((_, i) => i)
 const { data, error } = await supabase.from('pixels').select('*')
 const soldMap = new Set(data?.filter(p => p.is_sold).map(p => p.id))
 
+/*
 pixels.forEach((id) => {
   const div = document.createElement('div')
   div.className = 'pixel'
@@ -77,6 +78,55 @@ pixels.forEach((id) => {
 
     div.classList.toggle('selected')
     formContainer.style.display = selectedPixels.size > 0 ? 'block' : 'none'
+  })
+
+  grid.appendChild(div)
+})
+  */
+pixels.forEach((id) => {
+  const div = document.createElement('div')
+  div.className = 'pixel'
+  div.dataset.pixelId = id
+
+  const pixelData = data.find(p => p.id === id)
+
+  // Pixel considéré comme "vendu" si is_sold ou image_url ou link_url renseigné
+  const isOccupied = pixelData?.is_sold || pixelData?.link_url || pixelData?.image_url
+
+  if (isOccupied) {
+    div.classList.add('sold')
+
+    // ⚠️ Appliquer image OU couleur, pas les deux
+    if (pixelData.image_url) {
+      div.style.backgroundImage = `url('${pixelData.image_url}')`
+      div.style.backgroundSize = 'cover'
+      div.style.backgroundPosition = 'center'
+    } else if (pixelData.color) {
+      div.style.backgroundColor = pixelData.color
+    }
+
+    // Ajouter lien si présent
+    if (pixelData.link_url) {
+      const a = document.createElement('a')
+      a.href = pixelData.link_url
+      a.target = '_blank'
+      a.style.display = 'block'
+      a.style.width = '100%'
+      a.style.height = '100%'
+      a.appendChild(div)
+      grid.appendChild(a)
+      return // ← NE PAS ajouter à nouveau
+    }
+  }
+
+  // Gestion des pixels libres (interactifs)
+  div.addEventListener('click', () => {
+    if (!user) return alert('Connecte-toi pour acheter.')
+    if (div.classList.contains('sold')) return alert('Déjà vendu.')
+
+    selectedPixelId = id
+    formContainer.style.display = 'block'
+    window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' })
   })
 
   grid.appendChild(div)
