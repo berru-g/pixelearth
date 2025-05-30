@@ -32,7 +32,7 @@ const soldMap = new Set(data?.filter(p => p.is_sold).map(p => p.id))
 
 pixels.forEach((id) => {
   const div = document.createElement('div')
-  div.className = 'pixels'
+  div.className = 'pixel'
   if (soldMap.has(id)) div.classList.add('sold')
 
   div.addEventListener('click', () => {
