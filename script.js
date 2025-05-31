@@ -60,6 +60,12 @@ pixels.forEach((id) => {
 
   // 🔧 Ajout : appliquer color / image / lien si dispo
   const pixelData = data.find(p => p.id === id)
+  if (pixelData?.link_url) {
+    div.title = pixelData.link_url
+  } else {
+    div.title = `Pixel #${id}`
+  }
+
   if (pixelData) {
     if (pixelData.image_url) {
       div.style.setProperty('background-image', `url('${pixelData.image_url}')`, 'important')
