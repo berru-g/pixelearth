@@ -32,10 +32,10 @@ Chaque pixel acheté reste visible **à vie**, comme une empreinte numérique.
 
     Je venais de perdre mon travail, des lettres de dettes plein le bureau,
     il fallait que je trouve une solution.
-    Avec mes quelques compétences en dev web et SEO,
+    Avec mes quelques compétences en dev web, SEO
     et ChatGPT pour me guider sur le back-end,
     j'ai créé ce site en 24H (nuit blanche incluse).
 
-    Merci à vous de participer à ce projet inspiré de la Million Dollar Homepage lancée par Alex Tew en 2005.
+    Merci à vous de participer à ce projet.
 
     — Le créateur de PixelEarth

@@ -1,9 +1,9 @@
 :root {
-  --primary: #6e48aa;  
-  --secondary: #9d50bb; 
-  --dark: #1a1a2e;     
-  --light: #f4f4f4;    
-  --cta: #ff6b6b;   
+  --primary: #ab9ff2;
+  --secondary: #5086eb;
+  --dark: #2b2a33;
+  --light: #f1f1f1;
+  --cta: #f56545;   
 }
 
 body {
@@ -85,7 +85,7 @@ input[type="color"] {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  
 }
 
 .contact-form input,
