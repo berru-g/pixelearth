@@ -105,9 +105,17 @@ pixels.forEach((id) => {
 form.addEventListener('submit', async (e) => {
   e.preventDefault()
 
-  const color = document.getElementById('color').value
-  const imageUrl = document.getElementById('imageUrl').value
-  const linkUrl = document.getElementById('linkUrl').value
+  const color = document.getElementById('color')?.value || null
+  const imageUrl = document.getElementById('imageUrl')?.value || null
+  const linkUrl = document.getElementById('linkUrl')?.value || null
+
+  if (!selectedPixelId) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Erreur',
+      text: 'Aucun pixel sélectionné.'
+    })
+  }
 
   const res = await fetch('/.netlify/functions/createCheckoutSession', {
     method: 'POST',
@@ -116,13 +124,20 @@ form.addEventListener('submit', async (e) => {
   })
 
   const result = await res.json()
-  if (result.id) {
-    /*window.location.href = `https://checkout.stripe.com/pay/${result.id}`*/
+
+  if (result?.url) {
     window.location.href = result.url
+  } else if (result?.id) {
+    window.location.href = `https://checkout.stripe.com/pay/${result.id}`
   } else {
-    alert('Erreur Stripe : ' + result.error)
+    Swal.fire({
+      icon: 'error',
+      title: 'Erreur Stripe',
+      text: result.error || 'Une erreur est survenue.'
+    })
   }
 })
+
 
 // SweetAlert post-achat (si ?session_id dans l'URL)
 const urlParams = new URLSearchParams(window.location.search)
