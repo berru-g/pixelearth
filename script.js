@@ -10,8 +10,20 @@ const form = document.getElementById('customForm')
 window.login = async () => {
   const email = document.getElementById('email').value
   const { error } = await supabase.auth.signInWithOtp({ email })
-  if (error) return alert('Erreur: ' + error.message)
-  alert('Check ton email pour te connecter.')
+  if (error) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Erreur',
+      text: error.message
+    })
+  }
+
+  Swal.fire({
+    icon: 'info',
+    title: 'Vérifie ta boîte mail 📩',
+    text: 'Un lien de connexion t’a été envoyé.'
+  })
+
 }
 
 const session = await supabase.auth.getSession()
@@ -64,8 +76,22 @@ pixels.forEach((id) => {
   }
 
   div.addEventListener('click', () => {
-    if (!user) return alert('Connecte-toi pour acheter.')
-    if (div.classList.contains('sold')) return alert('Déjà vendu.')
+    if (!user) {
+      return Swal.fire({
+        icon: 'warning',
+        title: 'Connexion requise',
+        text: 'Connecte-toi pour acheter un pixel.'
+      })
+    }
+
+    if (div.classList.contains('sold')) {
+      return Swal.fire({
+        icon: 'info',
+        title: 'Oops...',
+        text: 'Ce pixel est déjà vendu.'
+      })
+    }
+
 
     selectedPixelId = id
     formContainer.style.display = 'block'
