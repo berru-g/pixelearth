@@ -54,6 +54,8 @@ pixelCounter.textContent = `🚀 Pixels vendus : ${soldPixels} / ${totalPixels}`
 pixels.forEach((id) => {
   const div = document.createElement('div')
   div.className = 'pixel'
+  div.title = `Pixel #${id}`
+
   if (soldMap.has(id)) div.classList.add('sold')
 
   // 🔧 Ajout : appliquer color / image / lien si dispo
