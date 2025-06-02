@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
 :root {
   --primary: #ab9ff2;
   --secondary: #5086eb;
@@ -18,8 +20,9 @@ body {
 
 h1 {
   text-align: center;
-  color: var(--cta);
-  font-size: 2.5rem;
+  color: var(--primary);
+  font-size: 2rem;
+  font-family: "Press Start 2P", system-ui;
   margin-bottom: 30px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -208,4 +211,17 @@ label {
 
 body {
   animation: fadeIn 0.5s ease-in;
+}
+/* signature invisible */
+h5 {
+  text-align: center;
+  color: var(--dark);
+}
+
+a {
+  text-decoration: none;
+  color: var(--dark);
+}
+a:hover {
+  color:#888;
 }
