@@ -213,14 +213,14 @@ body {
   animation: fadeIn 0.5s ease-in;
 }
 /* signature invisible */
-h5 {
+h6 {
   text-align: center;
-  color: var(--dark);
+  color: var(--primary);
 }
 
 a {
   text-decoration: none;
-  color: var(--dark);
+  color: var(--primary);
 }
 a:hover {
   color:#888;
