@@ -47,7 +47,7 @@ const pixelCounter = document.getElementById('pixel-counter')
 const totalPixels = pixels.length
 const soldPixels = soldMap.size
 
-pixelCounter.textContent = `🚀 Pixels vendus : ${soldPixels} / ${totalPixels}`
+pixelCounter.textContent = `⬜ Pixels vendus : ${soldPixels} / ${totalPixels}`
 
 
 // chargement des pixel sold et affichage des link & img

@@ -89,8 +89,8 @@
     // Popup déclenchée au chargement de la page
     document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
-            title: '🌍 Pixel Map - Un pixel à la fois, on change le monde numérique.',
-            html: `<p>Pixel Map est une carte numérique où vous pouvez <strong>acheter un pixel pour 1€</strong>, le personnaliser avec le <strong>logo et le lien de votre site</strong>. Devenez <strong>propriétaire d'un espace unique</strong> dans ce monde virtuel collaboratif.</p>`,
+            title: '🌍 Pixel Earth',
+            html: `<p>Bienvenue sur la carte numérique où vous pouvez <strong>acheter un pixel pour 1€</strong>, le personnaliser avec le <strong>logo et le lien de votre site</strong>. Devenez <strong>propriétaire d'un espace unique</strong> et profitez d'un espace de pub original.</p>`,
             icon: 'info',
             background: '#2b2a33',
             color: '#f1f1f1',
@@ -109,7 +109,7 @@
     </div>
 
     <div id="auth">
-        <input type="email" id="email" placeholder="Sign up to buy a pixel">
+        <input type="email" id="email" placeholder="Connecte-toi pour acheter un pixel.">
         <button onclick="login()">Connexion</button>
     </div>
     <div id="grid"></div>
@@ -118,7 +118,7 @@
         <form id="customForm">
             <label>Url de ton site: <input type="text" id="linkUrl" /></label><br />
             <label>URL de ton logo: <input type="text" id="imageUrl" /></label><br />
-            <label>Color : <input type="color" id="color" value="#5086eb" /></label><br /><br />
+            <label>Couleur (optionnel) : <input type="color" id="color" value="#5086eb" /></label><br /><br />
             <button type="submit">Acheter ton pixel 1€</button>
         </form>
     </div>
