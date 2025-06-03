@@ -120,9 +120,6 @@ SUPABASE_SERVICE_ROLE_KEY	Supabase > Settings > API (⚠️ pas public)
 .env
 node_modules
 
-
-
-
 Pour le paiement :
 
     ✅ Petit backend Netlify
@@ -139,19 +136,3 @@ Pour le paiement :
     ✅ Renseigner SUPABASE_URL et SUPABASE_ANON_KEY dans supabase.js.
 
     ✅ config Stripe /Stripe Checkout redirige vers un popup (sweetalert) de succès
-
-
-## ERREUR
-
-ok plusieurs point me semble des erreurs possible: 
-
-1, mon supabase.js était vide ( j'avais tout mis dans le js) redonne moi le contenue de ce fichier. 
-
-2, package.json est vide () que dois-je mettre dedans? 
-
-3, je dois vérifier que Enable email auth est bien coché dans Supabase > Auth > Settings > Auth providers > Email.
-
-4, le endpoint webhook dans Dashboard > Developers > Webhooks pas sur que l'url ressemble pas à la bonne "https://tonsite.netlify.app/.netlify/functions/stripeWebhook A verifier.
-"
-
-5, vérifier la structure de netlify

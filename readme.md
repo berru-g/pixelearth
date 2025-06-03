@@ -30,8 +30,7 @@ Chaque pixel acheté reste visible **à vie**, comme une empreinte numérique.
 
 🙌 Mention spéciale
 
-    Je venais de perdre mon travail, des lettres de dettes plein le bureau,
-    il fallait que je trouve une solution.
+
     Avec mes quelques compétences en dev web, SEO
     et ChatGPT pour me guider sur le back-end,
     j'ai créé ce site en 24H (nuit blanche incluse).
