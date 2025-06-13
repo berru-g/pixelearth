@@ -17,6 +17,10 @@ Chaque pixel acheté reste visible **à vie**, comme une empreinte numérique.
 - ✅ Mode admin manuel pour affecter un pixel sans paiement
 
 ---
+## Logique adopté
+
+![logique-plan-pixelsite](https://github.com/user-attachments/assets/72c4a21e-bb76-4ce6-a448-83612e3c5c17)
+
 
 ## 🛠️ Stack utilisée
 
