@@ -95,7 +95,7 @@ pixels.forEach((id) => {
     if (div.classList.contains('sold')) {
       const pixelData = data.find(p => p.id === id)
       // affichage du nom  du proprio du pixel
-      let ownerText = 'Ce pixel est déjà vendu.'
+      let ownerText = `<br><strong>Propriétaire :</strong> ${pixelData.owner_name}<br><strong>Site :</strong> <a href="${pixelData.link_url}" target="_blank">${pixelData.link_url}</a>`
       if (pixelData?.owner_name && pixelData?.link_url) {
         ownerText += `<br><strong>Propriétaire :</strong> ${pixelData.owner_name}<br><strong>Site :</strong> <a href="${pixelData.link_url}" target="_blank">${pixelData.link_url}</a>`
       }
