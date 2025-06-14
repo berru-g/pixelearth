@@ -74,13 +74,13 @@ pixels.forEach((id) => {
     } else if (pixelData.color) {
       div.style.setProperty('background-color', pixelData.color, 'important')
     }
-
-    if (pixelData.link_url) {
+    // redirection auto
+    /*if (pixelData.link_url) {
       div.addEventListener('click', (e) => {
         e.stopPropagation()
         window.open(pixelData.link_url, '_blank')
       })
-    }
+    }*/
   }
 
   div.addEventListener('click', () => {
@@ -95,14 +95,14 @@ pixels.forEach((id) => {
     if (div.classList.contains('sold')) {
       const pixelData = data.find(p => p.id === id)
       // affichage du nom  du proprio du pixel
-      let ownerText = `<br><strong>Propriétaire :</strong> ${pixelData.owner_name}<br><strong>Site :</strong> <a href="${pixelData.link_url}" target="_blank">${pixelData.link_url}</a>`
-      if (pixelData?.owner_name && pixelData?.link_url) {
-        ownerText += `<br><strong>Propriétaire :</strong> ${pixelData.owner_name}<br><strong>Site :</strong> <a href="${pixelData.link_url}" target="_blank">${pixelData.link_url}</a>`
+      let ownerText = `<br><strong>Propriétaire :</strong> ${pixelData.user_email}<br><strong>Site :</strong> <a href="${pixelData.link_url}" target="_blank">${pixelData.link_url}</a>`
+      if (pixelData?.user_email && pixelData?.link_url) {
+        ownerText += `<br><strong>Propriétaire :</strong> ${pixelData.user_email}<br><strong>Site :</strong> <a href="${pixelData.link_url}" target="_blank">${pixelData.link_url}</a>`
       }
 
       return Swal.fire({
         icon: 'info',
-        title: 'Oops...',
+        title: 'Pixel déja vendu',
         html: ownerText,
       })
     }
