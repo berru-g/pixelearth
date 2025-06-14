@@ -34,105 +34,12 @@
         content="Possédez et personnalisez un pixel sur notre carte. Ajouter votre logo et le lien de votre entreprise !" />
     <meta name="twitter:image" content="https://pixelearth.netlify.app/preview.jpg" />
     <link rel="stylesheet" href="./style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Pixel Map - Achat de pixel numérique",
-  "description": "Carte interactive où chaque pixel est vendu 1€. Ajouter votre logo et le lien de votre entreprise !",
-  "brand": {
-    "@type": "Brand",
-    "name": "Pixel Map"
-  },
-  "offers": {
-    "@type": "Offer",
-    "url": "https://pixelearth.netlify.app",
-    "priceCurrency": "EUR",
-    "price": "1.00",
-    "availability": "https://schema.org/InStock",
-    "itemCondition": "https://schema.org/NewCondition"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "150"
-  }
-}
-</script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Pixel Map",
-  "url": "https://pixelearth.netlify.app",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web Browser",
-  "screenshot": "https://pixelearth.netlify.app/pixelearth.png"
-}
-</script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7YQRY4S68X"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-7YQRY4S68X');
-    </script>
-
 </head>
-<script>
-    // Popup déclenchée au chargement de la page
-    document.addEventListener('DOMContentLoaded', () => {
-        Swal.fire({
-            title: '🌍 Pixel Earth',
-            html: `<p>Bienvenue sur la carte numérique où vous pouvez <strong>acheter un pixel pour 1€</strong>, le personnaliser avec le <strong>logo et le lien de votre site</strong>. Devenez <strong>propriétaire d'un espace unique</strong>.</p>`,
-            icon: 'info',
-            background: '#2b2a33',
-            color: '#f1f1f1',
-            confirmButtonText: 'Explorer la carte',
-            confirmButtonColor: '#5086eb',
-            showCloseButton: true,
-            imageAlt: 'Carte Pixel Map',
-        });
-    });
-</script>
-
 <body>
-    <h1>Pixel earth 1€ = 1 pixel</h1>
-    <div id="pixel-counter" style="text-align:center;margin: 10px; font-weight: bold; color: #f1f1f1;">
-        Chargement...
-    </div>
-
-    <div id="auth">
-        <input type="email" id="email" placeholder="Connecte-toi pour acheter un pixel.">
-        <button onclick="login()">Connexion</button>
-    </div>
-    <div id="grid"></div>
-    <div id="pixel-form" style="display:none; margin-top:20px;">
-        <h2>Personnalise ton pixel</h2>
-        <form id="customForm">
-            <label>Url de ton site: <input type="text" id="linkUrl" placeholder="www.mon-site.com"/></label><br />
-            <label>URL de ton logo: <input type="text" id="imageUrl" placeholder="www.mon-site.com/img/mon-logo.png"/></label><br />
-            <label>Couleur (optionnel) : <input type="color" id="color" value="#5086eb" /></label><br /><br />
-            <button type="submit">Acheter mon pixel 1€</button>
-        </form>
-    </div>
-    <br>
-    <form action="https://formspree.io/f/mjkrbalj" method="POST" class="contact-form">
-        <input type="email" name="email" placeholder="Ton mail" required>
-        <textarea name="message" placeholder="Un bug à me signaler ?" required></textarea>
-        <button type="submit">Envoyer</button>
-    </form>
-    <br>
-    <h6><a href="https://github.com/berru-g/">dev by berru-g</a></h6>
-
-    <script type="module" src="script.js"></script>
-
+    <!--stripe demande mon num fiscal cfdp tu le site dans loeuf-->
+    <!--Solution 1 - Installer Solana Pay/USDC-->
+    <!--Solution 2 - Buy me a coffe-->
+    <h1>Site en maintenance...</h1>
+    <p>⚙️ Vous pouvez visiter et vous inscrire sur le site mais pas acheter de pixel pour le moment. </p>
+    <a href="./V1.html"><button>visiter pixel earth</button></a>
 </body>
-
-</html>
