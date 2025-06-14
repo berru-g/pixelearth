@@ -96,7 +96,8 @@ pixels.forEach((id) => {
       return Swal.fire({
         icon: 'info',
         title: 'Oops...',
-        text: 'Ce pixel est déjà vendu.'
+        text: 'Ce pixel est déjà vendu.',
+        body: JSON.stringify({ pixelId: selectedPixelId, color, imageUrl, linkUrl }),//teste affichage name
       })
     }
 

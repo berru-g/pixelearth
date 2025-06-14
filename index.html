@@ -90,7 +90,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
             title: '🌍 Pixel Earth',
-            html: `<p>Bienvenue sur la carte numérique où vous pouvez <strong>acheter un pixel pour 1€</strong>, le personnaliser avec le <strong>logo et le lien de votre site</strong>. Devenez <strong>propriétaire d'un espace unique</strong> et profitez d'un espace de pub original.</p>`,
+            html: `<p>Bienvenue sur la carte numérique où vous pouvez <strong>acheter un pixel pour 1€</strong>, le personnaliser avec le <strong>logo et le lien de votre site</strong>. Devenez <strong>propriétaire d'un espace unique</strong>.</p>`,
             icon: 'info',
             background: '#2b2a33',
             color: '#f1f1f1',
@@ -116,10 +116,10 @@
     <div id="pixel-form" style="display:none; margin-top:20px;">
         <h2>Personnalise ton pixel</h2>
         <form id="customForm">
-            <label>Url de ton site: <input type="text" id="linkUrl" /></label><br />
-            <label>URL de ton logo: <input type="text" id="imageUrl" /></label><br />
+            <label>Url de ton site: <input type="text" id="linkUrl" placeholder="www.mon-site.com"/></label><br />
+            <label>URL de ton logo: <input type="text" id="imageUrl" placeholder="www.mon-site.com/image/logo.png"/></label><br />
             <label>Couleur (optionnel) : <input type="color" id="color" value="#5086eb" /></label><br /><br />
-            <button type="submit">Acheter ton pixel 1€</button>
+            <button type="submit">Acheter mon pixel 1€</button>
         </form>
     </div>
     <br>
