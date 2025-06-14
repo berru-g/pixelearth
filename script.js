@@ -93,13 +93,20 @@ pixels.forEach((id) => {
     }
 
     if (div.classList.contains('sold')) {
+      const pixelData = data.find(p => p.id === id)
+      // affichage du nom  du proprio du pixel
+      let ownerText = 'Ce pixel est déjà vendu.'
+      if (pixelData?.owner_name && pixelData?.link_url) {
+        ownerText += `<br><strong>Propriétaire :</strong> ${pixelData.owner_name}<br><strong>Site :</strong> <a href="${pixelData.link_url}" target="_blank">${pixelData.link_url}</a>`
+      }
+
       return Swal.fire({
         icon: 'info',
         title: 'Oops...',
-        text: 'Ce pixel est déjà vendu.',
-        body: JSON.stringify({ pixelId: selectedPixelId, color, imageUrl, linkUrl }),//teste affichage name
+        html: ownerText,
       })
     }
+
 
 
     selectedPixelId = id
