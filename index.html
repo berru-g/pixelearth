@@ -73,8 +73,6 @@
   "screenshot": "https://pixelearth.netlify.app/pixelearth.png"
 }
 </script>
-
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7YQRY4S68X"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -83,10 +81,8 @@
 
         gtag('config', 'G-7YQRY4S68X');
     </script>
-
 </head>
 <script>
-    // Popup déclenchée au chargement de la page
     document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
             title: '🌍 Pixel Earth',
@@ -101,13 +97,11 @@
         });
     });
 </script>
-
 <body>
     <h1>Pixel earth 1€ = 1 pixel</h1>
     <div id="pixel-counter" style="text-align:center;margin: 10px; font-weight: bold; color: #f1f1f1;">
         Chargement...
     </div>
-
     <div id="auth">
         <input type="email" id="email" placeholder="Connecte-toi pour acheter un pixel.">
         <button onclick="login()">Connexion</button>
@@ -131,9 +125,6 @@
     </form>
     <br>
     <h6><a href="https://gael-berru.netlify.app/">dev by berru-g</a></h6>
-
     <script type="module" src="script.js"></script>
-
 </body>
-
 </html>
